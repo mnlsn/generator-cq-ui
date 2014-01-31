@@ -1,4 +1,4 @@
-# generator-cq-ui [![Build Status](https://secure.travis-ci.org/mnlsn/generator-cq-ui.png?branch=master)](https://travis-ci.org/mnlsn/generator-cq-ui)
+# generator-cq-ui
 
 A generator for [Yeoman](http://yeoman.io).
 
