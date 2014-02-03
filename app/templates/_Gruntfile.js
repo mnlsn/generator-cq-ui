@@ -1,6 +1,7 @@
 path = require('path');
 
 module.exports = function(grunt) {
+  'use strict';
   // Load all Grunt tasks
   require('load-grunt-tasks')(grunt);
   // Show elapsed time after tasks run
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
     },
     macreload: {
       reload: {
-        browser: 'chrome'
+        browser: '<%= pkg.options.browser %>'
       }
     },
     myth: {
@@ -88,8 +89,8 @@ module.exports = function(grunt) {
           pass: '<%= pkg.options.password %>',
           exclude: ['.DS_Store']
         },
-        src: "apps/",
-        dest: "/apps/"
+        src: 'apps/',
+        dest: '/apps/'
       },
       publish: {
         options: {
@@ -99,16 +100,16 @@ module.exports = function(grunt) {
           pass: '<%= pkg.options.password %>',
           exclude: ['.DS_Store']
         },
-        src: "apps/",
-        dest: "/apps/"
+        src: 'apps/',
+        dest: '/apps/'
       }
     }
   });
 
   grunt.event.on('watch', function(action, filepath, target) {
     var destination;
-    if (path.dirname(filepath).indexOf("jcr_root/") !== -1) {
-      destination = '/' + path.dirname(filepath).substring(path.dirname(filepath).indexOf("jcr_root/") + 9);
+    if (path.dirname(filepath).indexOf('jcr_root/') !== -1) {
+      destination = '/' + path.dirname(filepath).substring(path.dirname(filepath).indexOf('jcr_root/') + 9);
     } else {
       destination = '/' + path.dirname(filepath);
     }

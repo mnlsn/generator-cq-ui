@@ -25,6 +25,7 @@
     "project": "<%= cqProject %>",
     "cqroot": "<%= cqRoot %>",
     "mvnpublish": "<%= mvnPublish %>",
-    "mvnauthor": "<%= mvnAuthor %>"
+    "mvnauthor": "<%= mvnAuthor %>",
+    "browser": "<%= devBrowser %>"
   }
 }

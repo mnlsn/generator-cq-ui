@@ -16,7 +16,7 @@ var CqUiGenerator = module.exports = function CqUiGenerator(args, options, confi
 
 util.inherits(CqUiGenerator, yeoman.generators.Base);
 
-CqUiGenerator.prototype.prompts = function prompts() {
+CqUiGenerator.prototype.prompts = function allPrompts() {
   var cb = this.async();
 
   // have Yeoman greet the user.
@@ -114,6 +114,10 @@ CqUiGenerator.prototype.prompts = function prompts() {
       },
       name: 'mvnPublish',
       message: 'What is the Maven command to use for author? (ex: mvn clean install local-publish)'
+    },
+    {
+      name: 'devBrowser',
+      message: 'What browser do you use most in development?'
     }
   ];
 
@@ -128,6 +132,7 @@ CqUiGenerator.prototype.prompts = function prompts() {
     this.cqRoot = props.cqRoot ? props.cqRoot.replace(trailingSlash, "") + '/' : '';
     this.mvnAuthor = props.mvnAuthor || 'mvn clean install';
     this.mvnPublish = props.mvnPublish || 'mvn clean install';
+    this.devBrowser = props.devBrowser.toLowerCase() || 'chrome';
 
     cb();
   }.bind(this));
