@@ -1,5 +1,3 @@
-path = require('path');
-
 module.exports = function(grunt) {
   'use strict';
   // Load all Grunt tasks
@@ -57,67 +55,39 @@ module.exports = function(grunt) {
         browser: '<%= pkg.options.browser %>'
       }
     },
-    myth: {
-      css: {
-        files: {
-          '/Desktop/pre-style.css': '/Desktop/test.css'
-        }
-      }
-    },
     watch: {
       author: {
         files: ['/<%= pkg.options.project %>src/main/content/jcr_root/**/*.{css,html,js,jsp,less,sass,scss,txt}'],
-        tasks: ['slingPost:author', 'macreload'],
+        tasks: ['slung:author', 'macreload'],
         options: {
           spawn: false,
         },
       },
       publish: {
         files: ['/<%= pkg.options.project %>src/main/content/jcr_root/**/*.{css,html,js,jsp,less,sass,scss,txt}'],
-        tasks: ['slingPost:publish', 'macreload'],
+        tasks: ['slung:publish', 'macreload'],
         options: {
           spawn: false,
         },
       },
     },
-    slingPost: {
+    slung: {
       author: {
         options: {
-          host: '<%= pkg.options.host %>',
-          port: '<%= pkg.options.author %>',
-          user: '<%= pkg.options.user %>',
-          pass: '<%= pkg.options.password %>',
-          exclude: ['.DS_Store']
-        },
-        src: 'apps/',
-        dest: '/apps/'
+          port: '4502'
+        }
       },
       publish: {
         options: {
-          host: '<%= pkg.options.host %>',
-          port: '<%= pkg.options.publish %>',
-          user: '<%= pkg.options.user %>',
-          pass: '<%= pkg.options.password %>',
-          exclude: ['.DS_Store']
-        },
-        src: 'apps/',
-        dest: '/apps/'
+          port: '4503'
+        }
       }
     }
   });
 
   grunt.event.on('watch', function(action, filepath, target) {
-    var destination;
-    if (path.dirname(filepath).indexOf('jcr_root/') !== -1) {
-      destination = '/' + path.dirname(filepath).substring(path.dirname(filepath).indexOf('jcr_root/') + 9);
-    } else {
-      destination = '/' + path.dirname(filepath);
-    }
-
-    grunt.config.set(['slingPost', 'author', 'src'], [path.dirname(filepath) + '/']);
-    grunt.config.set(['slingPost', 'author', 'dest'], [destination]);
-    grunt.config.set(['slingPost', 'publish', 'src'], [path.dirname(filepath) + '/']);
-    grunt.config.set(['slingPost', 'publish', 'dest'], [destination]);
+    grunt.config.set(['slung', 'author', 'src'], filepath);
+    grunt.config.set(['slung', 'publish', 'src'], filepath);
   });
 
   grunt.registerTask('start-author', 'shell:startAuthor');
@@ -126,8 +96,6 @@ module.exports = function(grunt) {
   grunt.registerTask('stop-publish', 'shell:killpublish');
   grunt.registerTask('mvn-publish', 'shell:mvnpublish');
   grunt.registerTask('mvn-author', 'shell:mvnauthor');
-  grunt.registerTask('publish-image', 'slingPost:publishImg');
-  grunt.registerTask('author-image', 'slingPost:authorImg');
   grunt.registerTask('author', ['watch:author']);
   grunt.registerTask('publish', ['watch:publish']);
   grunt.registerTask('default', ['watch']);

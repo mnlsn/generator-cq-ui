@@ -1,6 +1,6 @@
 {
   "name": "generator-cq-ui",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A generator for Yeoman to help ease UI development in Adobe AEM/CQ",
   "keywords": [
     "yeoman-generator"
@@ -16,9 +16,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/mnlsn/generator-cq-ui.git"
-  },
-  "scripts": {
-    "test": "mocha"
   },
   "dependencies": {
     "yeoman-generator": "~0.14.0",
